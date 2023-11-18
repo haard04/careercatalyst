@@ -1,0 +1,47 @@
+body{
+    background-image:url("588069.jpg");
+    backface-visibility: initial;
+    opacity: 0.6;
+
+}
+.grid{
+    display:flex;
+    flex-direction: row;    
+    column-gap: 5rem;
+    justify-content: top;
+    align-items: top;
+    margin: 2rem;
+    color: white;
+}
+.button{
+    height: 2rem;
+    width: 8rem;
+    color: whitesmoke;
+}
+a{
+    color: whitesmoke;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-decoration: none;
+    width: 2rem;
+}
+.title{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: -1rem;
+}
+.dsc{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+    margin-left: 10rem;
+}
+.newbtn{
+    width: 15rem;
+    height :3rem;
+    border: 2px solid black;
+    border-radius: 2rem;
+}

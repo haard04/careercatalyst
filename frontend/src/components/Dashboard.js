@@ -6,7 +6,7 @@ import { getCookie } from '../csrf';
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
   const csrftoken = getCookie('csrftoken');
-  const sessionid = getCookie('sessionid')
+  const sessionid = getCookie('sessionid');
 
   useEffect(() => {
     const fetchJobs = async () => {

@@ -1,13 +1,222 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255, 255, 255;
+    --foreground: 15, 23, 42;
+
+    --muted: 241, 245, 249;
+    --muted-foreground: 100, 116, 139;
+
+    --border: 226, 232, 240;
+    --input: var(--border);
+
+    --primary: 59, 130, 246;
+    --primary-foreground: var(--foreground);
+
+    --secondary: 234, 179, 8;
+    --secondary-foreground: var(--foreground);
+
+    --accent: 241, 245, 249;
+    --accent-foreground: 15, 23, 42;
+
+    --destructive: 255, 0, 0;
+    --destructive-foreground: 248, 250, 252;
+
+    --info: 239, 246, 255;
+    --info-border: 147, 197, 253;
+    --info-foreground: 30, 64, 175;
+
+    --warning: 254, 252, 232;
+    --warning-border: 253, 224, 71;
+    --warning-foreground: 133, 77, 14;
+
+    --success: 240, 253, 244;
+    --success-border: 134, 239, 172;
+    --success-foreground: 22, 101, 52;
+
+    --error: 254, 242, 242;
+    --error-border: 252, 165, 165;
+    --error-foreground: 153, 27, 27;
+    --error-form-foreground: 239, 68, 68;
+
+    --ring: 148, 163, 184;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --state-bg-dark: 31, 41, 55;
+
+    --background: 3, 7, 17;
+    --foreground: 225, 231, 239;
+
+    --muted: 15, 22, 41;
+    --muted-foreground: 127, 142, 163;
+
+    --border: 29, 40, 58;
+    --input: var(--border);
+
+    --primary: 59, 130, 246;
+    --primary-foreground: var(--foreground);
+
+    --secondary: 234, 179, 8;
+    --secondary-foreground: var(--foreground);
+
+    --accent: 29, 40, 58;
+    --accent-foreground: 248, 250, 252;
+
+    --destructive: 129, 29, 29;
+    --destructive-foreground: 248, 250, 252;
+
+    --info: var(--state-bg-dark);
+    --info-border: 30, 64, 175;
+    --info-foreground: 96, 165, 250;
+
+    --warning: var(--state-bg-dark);
+    --warning-border: 133, 77, 14;
+    --warning-foreground: 253, 224, 71;
+
+    --success: var(--state-bg-dark);
+    --success-border: 22, 101, 52;
+    --success-foreground: 74, 222, 128;
+
+    --error: var(--state-bg-dark);
+    --error-border: 153, 27, 27;
+    --error-foreground: 248, 113, 113;
+    --error-form-foreground: 185, 28, 28;
+
+    --ring: 29, 40, 58;
+
+    --radius: 0.5rem;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: theme('colors.border');
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background-color: theme('colors.primary.DEFAULT');
+    color: theme('colors.primary.foreground');
+  }
+
+  body {
+    background-color: theme('colors.background');
+    color: theme('colors.foreground');
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  :where(h1, h2, h3, h4) {
+    @apply scroll-m-20 tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl font-extrabold lg:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+
+  h4 {
+    @apply text-xl font-semibold;
+  }
+
+  p {
+    @apply leading-7 text-muted-foreground;
+  }
+
+  small {
+    @apply text-sm font-medium leading-none;
+  }
+
+  a {
+    @apply inline-block p-1 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md;
+  }
+
+  input[type='search']::-webkit-search-cancel-button {
+    display: none;
+  }
+}
+
+@layer base {
+  html,
+  body,
+  textarea {
+    scrollbar-color: theme('colors.primary.DEFAULT') transparent;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+    border: 1px solid theme('colors.border');
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: theme('colors.primary.DEFAULT');
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+}
+
+@layer components {
+  .dashboard-grid-container {
+    display: grid;
+    grid-template-areas:
+      'sidebar header header'
+      'sidebar main main'
+      'sidebar main main';
+    grid-auto-columns: auto 1fr;
+    grid-auto-rows: auto 1fr;
+  }
+
+  .dashboard-header {
+    grid-area: header;
+  }
+
+  .dashboard-sidebar {
+    grid-area: sidebar;
+  }
+
+  .dashboard-main {
+    grid-area: main;
+  }
+
+  .gradient-text-stroke {
+    font-size: theme('fontSize.9xl');
+    background-color: theme('colors.foreground');
+    background-image: linear-gradient(
+      45deg,
+      theme('colors.primary.DEFAULT'),
+      theme('colors.secondary.DEFAULT')
+    );
+    color: theme('colors.background');
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-stroke-color: transparent;
+    -webkit-text-stroke-width: 15px;
+  }
+}
+
+@layer utilities {
+  .min-h-dm {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  .max-h-dm {
+    max-height: 100vh;
+    max-height: 100dvh;
+  }
 }
