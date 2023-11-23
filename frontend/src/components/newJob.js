@@ -34,7 +34,7 @@ const AddJobForm = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:8000/addJobToProfile',
+        'https://online-resume-watcher-6xw5.onrender.com/addJobToProfile',
         jobDetails,
         {
           withCredentials:true,

@@ -11,7 +11,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/getjobsbyid', { 
+        const response = await axios.get('https://online-resume-watcher-6xw5.onrender.com/getjobsbyid', { 
           withCredentials: true,
         });
         console.log(response.data)
