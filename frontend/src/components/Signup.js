@@ -49,7 +49,7 @@ const Signup = () => {
     <div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSignup}>
-      <h2 class='text-white'>Sign Up</h2>
+      <h2 class='text-white mt-5'>Sign Up</h2>
 
       <div class="form-group">
     <label for="formGroupExampleInput" class='text-white'>Username</label>

@@ -64,7 +64,7 @@ const Login = () => {
         <button type="submit">Login</button>
       </form> */}
       <form onSubmit={handleLogin}>
-      <h2 class='text-white'>Login</h2>
+      <h2 class='text-white mt-5'>Login</h2>
 
       <div class="form-group">
     <label for="formGroupExampleInput" class='text-white'>Username</label>

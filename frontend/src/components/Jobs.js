@@ -19,21 +19,35 @@ const Jobs = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Job Opportunities</h2>
-      <ul>
-        {jobs.map(job => (
-          <li key={job.job_id}>
-            <p>{job.role} at {job.company_name}</p>
-            <p>Location: {job.location}</p>
-            <p>Stipend: {job.stipend_amount}</p>
-            <p>Job Type: {job.job_type}</p>
-            <p>Apply here: {job.job_link}</p>
-            {/* Add more details as needed */}
-          </li>
-        ))}
-      </ul>
+    // <div>
+    //   <h2>Job Opportunities</h2>
+    //   <ul>
+    //     {jobs.map(job => (
+    //       <li key={job.job_id}>
+    //         <p>{job.role} at {job.company_name}</p>
+    //         <p>Location: {job.location}</p>
+    //         <p>Stipend: {job.stipend_amount}</p>
+    //         <p>Job Type: {job.job_type}</p>
+    //         <p>Apply here: {job.job_link}</p>
+    //         {/* Add more details as needed */}
+    //       </li>
+    //     ))}
+    //   </ul>
+    // </div>
+<div class="job-opportunities">
+  {jobs.map(job => (
+    <div class="job-section" key={job.job_id}>
+      <h3>{job.role}</h3>
+      <p>Company: {job.company_name}</p>
+      <p>Location: {job.location}</p>
+      <p>Stipend: {job.stipend_amount}</p>
+      <p>Job Type: {job.job_type}</p>
+      <p>Apply here: <a href={job.job_link}>{job.job_link}</a></p>
+      {/* Add more details as needed */}
     </div>
+  ))}
+</div>
+
   );
 };
 

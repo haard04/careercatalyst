@@ -1,3 +1,31 @@
 body{
     color: whitesmoke;
 }
+.job-opportunities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Adjust the gap between sections as needed */
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    padding: 1rem;
+  }
+h2{
+    margin-bottom: 2rem;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+  .job-section {
+    border: 3px solid #ddd;
+    box-shadow: inset 0rem 0rem 2rem 0.3rem rgb(25, 24, 29);
+    border-radius: 1rem;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 300px; /* Set a fixed height for each job section */
+    overflow: hidden; /* Hide overflow content */
+  }
+
+  .job-section p {
+    margin: 0; /* Remove default margin for paragraphs */
+  }
