@@ -1,6 +1,9 @@
 // src/components/Signup.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import "./css/signup.css"
+import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -42,37 +45,35 @@ const Signup = () => {
   };
 
   return (
+    
     <div>
-      <h2>Sign Up</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-
       <form onSubmit={handleSignup}>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </label>
-        <br />
+      <h2 class='text-white'>Sign Up</h2>
 
-        <label>
-          Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </label>
-        <br />
-
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <br />
-
-        <label>
-          Confirm Password:
-          <input type="password" value={password2} onChange={(e) => setPassword2(e.target.value)} />
-        </label>
-        <br />
-
-        <button type="submit">Sign Up</button>
-      </form>
+      <div class="form-group">
+    <label for="formGroupExampleInput" class='text-white'>Username</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" value={username} onChange={(e) => setUsername(e.target.value)}></input>
+  </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="text-white">Email address</label>
+        <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" ></input>
+        <small id="emailHelp" class="form-text text-white">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1" class="text-white">Password</label>
+        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ></input>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1" class="text-white">Confirm Password</label>
+        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ></input>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" ></input>
+        <label class="form-check-label text-white" for="exampleCheck1">Check me out</label>
+      </div>
+      <button type="submit" class="btn btn-primary" >Sign Up</button>
+    </form>
     </div>
   );
 };

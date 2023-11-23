@@ -46,10 +46,9 @@ const Login = () => {
 
   return (
     <div>
-      <h2>Login</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <form onSubmit={handleLogin}>
+      {/* <form onSubmit={handleLogin}>
         <label>
           Username:
           <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -63,7 +62,25 @@ const Login = () => {
         <br />
 
         <button type="submit">Login</button>
-      </form>
+      </form> */}
+      <form onSubmit={handleLogin}>
+      <h2 class='text-white'>Login</h2>
+
+      <div class="form-group">
+    <label for="formGroupExampleInput" class='text-white'>Username</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
+  </div>
+  <div className="form-group">
+    <label htmlFor="exampleInputPassword1" style={{ color: 'white' }}>Password</label>
+    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+  </div>
+  <div className="form-group form-check">
+    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+    <label className="form-check-label" htmlFor="exampleCheck1" style={{ color: 'white' }}>Check me out</label>
+  </div>
+  <button type="submit" className="btn btn-primary">Submit</button>
+</form>
+
     </div>
   );
 };

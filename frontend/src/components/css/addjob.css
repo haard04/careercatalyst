@@ -1,0 +1,14 @@
+form{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+label{
+     width: 20rem;
+}
+h2{
+    margin-right: 4rem;
+}

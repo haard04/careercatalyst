@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { getCookie } from '../csrf';
-
+import "./css/addjob.css"
 const AddJobForm = () => {
     const csrftoken = getCookie('csrftoken');
   const sessionid = getCookie('sessionid');
@@ -50,11 +50,11 @@ const AddJobForm = () => {
 
   return (
     <div>
-      <h2>Add Job</h2>
       <form onSubmit={handleSubmit}>
+      <h2>Add Job</h2>
+
         <label>
-          Role:
-          <input
+          Role :  <input
             type="text"
             name="role"
             value={jobDetails.role}
@@ -62,8 +62,7 @@ const AddJobForm = () => {
           />
         </label>
         <label>
-          Company Name:
-          <input
+          Company Name :  <input
             type="text"
             name="company_name"
             value={jobDetails.company_name}
@@ -71,8 +70,7 @@ const AddJobForm = () => {
           />
         </label>
         <label>
-          Location:
-          <input
+          Location : <input
             type="text"
             name="location"
             value={jobDetails.location}
@@ -80,8 +78,7 @@ const AddJobForm = () => {
           />
         </label>
         <label>
-          Stipend Amount:
-          <input
+          Stipend Amount : <input
             type="number"
             name="stipend_amount"
             value={jobDetails.stipend_amount}
@@ -89,8 +86,7 @@ const AddJobForm = () => {
           />
         </label>
         <label>
-          Job Type:
-          <input
+          Job Type :  <input
             type="text"
             name="job_type"
             value={jobDetails.job_type}
@@ -98,8 +94,7 @@ const AddJobForm = () => {
           />
         </label>
         <label>
-          Application Date:
-          <input
+          Application Date :  <input
             type="text"
             name="application_date"
             value={jobDetails.application_date}
@@ -107,8 +102,7 @@ const AddJobForm = () => {
           />
         </label>
         <label>
-          Status:
-          <input
+          Status :  <input
             type="text"
             name="status"
             value={jobDetails.status}
@@ -116,8 +110,7 @@ const AddJobForm = () => {
           />
         </label>
         <label>
-          Job Link:
-          <input
+          Job Link :  <input
             type="text"
             name="job_link"
             value={jobDetails.job_link}
@@ -125,15 +118,14 @@ const AddJobForm = () => {
           />
         </label>
         <label>
-          Referred By:
-          <input
+          Referred By :   <input
             type="text"
             name="referred_by"
             value={jobDetails.referred_by}
             onChange={handleInputChange}
           />
         </label>
-        <button type="submit">Add Job</button>
+        <button type="submit" class="btn btn-primary">AddJob</button>
       </form>
     </div>
   );
