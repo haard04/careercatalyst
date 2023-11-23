@@ -1,15 +1,14 @@
 // src/csrf.js
 
 export function getCookie(name) {
-    const cookieString = `; ${document.cookie}`;
-    const parts = cookieString.split(`; ${name}=`);
-    
-    if (parts.length === 2) {
-      return parts.pop().split(';').shift().trim(); // Trim to remove leading/trailing spaces
-    }
-  
-    return null; // Return null if the cookie is not found
-  }
+  const cookieValue = document.cookie
+    .split(';')
+    .map(cookie => cookie.trim())
+    .find(cookie => cookie.startsWith(`${name}=`));
+
+  return cookieValue ? cookieValue.split('=')[1] : null;
+}
+
 
 
 // src/csrf.js

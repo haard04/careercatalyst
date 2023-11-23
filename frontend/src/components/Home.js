@@ -32,6 +32,16 @@ function IndexPageClient() {
       <p className="title">
         CareerCatalyst
       </p>
+      </div>
+      
+    <div>
+      <h1>Welcome to My App</h1>
+      <Link to="/signup">Sign Up</Link>
+      <Link to="/login">Login</Link>
+      <Link to="/jobs">Jobs</Link>
+      <Link to="/Dashboard">Dashboard</Link>
+      <Link to="/AddJobForm">AddJobForm</Link>
+
     </div>
     <div className='dsc'>
       <h1>CareerCatalysts</h1>

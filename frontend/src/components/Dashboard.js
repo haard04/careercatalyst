@@ -11,14 +11,10 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        console.log(csrftoken)
-        const response = await axios.get('http://localhost:8000/getjobsbyid', {
-          headers: {
-            'X-CSRFToken': csrftoken,
-            'Cookie': `sessionid=${sessionid}; csrftoken=${csrftoken}`,
-          },
+        const response = await axios.get('https://online-resume-watcher-6xw5.onrender.com/getjobsbyid', { 
+          withCredentials: true,
         });
-
+        console.log(response.data)
         if (response.data && response.data.jobs) {
           setJobs(response.data.jobs);
         }
@@ -29,16 +25,22 @@ const Dashboard = () => {
     };
 
     fetchJobs();
-  }, [csrftoken,sessionid]);
+  }, [csrftoken, sessionid]);
 
   return (
     <div>
       <h2>Dashboard</h2>
       {/* Render jobs in your component */}
       {jobs.map(job => (
-        <div key={job.job_id}>
-          <p>{job.role} at {job.company_name}</p>
-          {/* Add other job details as needed */}
+        <div key={job.job_id} className="job-card">
+          <h3>{job.role}</h3>
+          <p>Company: {job.company_name}</p>
+          <p>Location: {job.location}</p>
+          <p>Stipend: ${job.stipend_amount}</p>
+          <p>Job Type: {job.job_type}</p>
+          <p>Status: {job.status}</p>
+          <a href={job.job_link} target="_blank" rel="noopener noreferrer">Job Link</a>
+          <p>Referred by: {job.referred_by}</p>
         </div>
       ))}
     </div>
