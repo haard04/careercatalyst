@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getCookie } from '../csrf';
-
+import './css/dashboard.css'
+import { Link } from 'react-router-dom';
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
   const csrftoken = getCookie('csrftoken');
@@ -11,7 +12,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('https://online-resume-watcher-6xw5.onrender.com/getjobsbyid', { 
+        const response = await axios.get('http://localhost:8000/getjobsbyid', { 
           withCredentials: true,
         });
         console.log(response.data)
@@ -29,7 +30,9 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>Dashboard</h2>
+      <Link to='/jobs' ><button  className='button'>Jobs</button></Link>
+    <div class='jobs'> 
+      
       {/* Render jobs in your component */}
       {jobs.map(job => (
         <div key={job.job_id} className="job-card">
@@ -39,10 +42,11 @@ const Dashboard = () => {
           <p>Stipend: ${job.stipend_amount}</p>
           <p>Job Type: {job.job_type}</p>
           <p>Status: {job.status}</p>
-          <a href={job.job_link} target="_blank" rel="noopener noreferrer">Job Link</a>
+          <p>Job Link: {job.job_link}</p>
           <p>Referred by: {job.referred_by}</p>
         </div>
       ))}
+    </div>
     </div>
   );
 };
