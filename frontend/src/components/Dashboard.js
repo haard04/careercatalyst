@@ -4,6 +4,16 @@ import axios from 'axios';
 import { getCookie } from '../csrf';
 import './css/dashboard.css'
 import { Link } from 'react-router-dom';
+
+const columns = [
+  { title: 'Watchlist', key: 'watchlist' },
+  { title: 'Applied', key: 'applied' },
+  { title: 'Online Assessment', key: 'onlineAssessment' },
+  { title: 'Interview', key: 'interview' },
+  { title: 'Accepted', key: 'accepted' },
+  { title: 'Rejected', key: 'rejected' },
+];
+
 const Dashboard = () => {
   const [jobs, setJobs] = useState([]);
   const csrftoken = getCookie('csrftoken');
@@ -20,7 +30,6 @@ const Dashboard = () => {
           setJobs(response.data.jobs);
         }
       } catch (error) {
-        // Handle errors...
         console.error('Error fetching jobs:', error.message);
       }
     };
@@ -29,24 +38,29 @@ const Dashboard = () => {
   }, [csrftoken, sessionid]);
 
   return (
-    <div>
-      <Link to='/jobs' ><button  className='button'>Jobs</button></Link>
-    <div class='jobs'> 
-      
-      {/* Render jobs in your component */}
-      {jobs.map(job => (
-        <div key={job.job_id} className="job-card">
-          <h3>{job.role}</h3>
-          <p>Company: {job.company_name}</p>
-          <p>Location: {job.location}</p>
-          <p>Stipend: ${job.stipend_amount}</p>
-          <p>Job Type: {job.job_type}</p>
-          <p>Status: {job.status}</p>
-          <p>Job Link: {job.job_link}</p>
-          <p>Referred by: {job.referred_by}</p>
-        </div>
-      ))}
-    </div>
+    <div className="dashboard">
+      <Link to='/jobs'><button className='button'>Jobs</button></Link>
+      <Link to='/'><button className='button'>Home</button></Link>
+      <div className="columns">
+        {columns.map(column => (
+          <div key={column.key} className="column">
+            <h2>{column.title}</h2>
+            {jobs
+              .filter(job => job.status.toLowerCase() === column.key.toLowerCase())
+              .map(job => (
+                <div key={job.job_id} className="job-card">
+                  <h3>{job.role}</h3>
+                  <p>Company: {job.company_name}</p>
+                  <p>Location: {job.location}</p>
+                  <p>Stipend: ${job.stipend_amount}</p>
+                  <p>Job Type: {job.job_type}</p>
+                  <p>Job Link: {job.job_link}</p>
+                  <p>Referred by: {job.referred_by}</p>
+                </div>
+              ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getCookie } from '../csrf';
 import "./css/addjob.css"
 const AddJobForm = () => {
-    const csrftoken = getCookie('csrftoken');
+  const csrftoken = getCookie('csrftoken');
   const sessionid = getCookie('sessionid');
 
   const [jobDetails, setJobDetails] = useState({
@@ -32,13 +32,36 @@ const AddJobForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append('role', jobDetails.role);
+    formData.append('company_name', jobDetails.company_name);
+    formData.append('location', jobDetails.location);
+    formData.append('stipend_amount', jobDetails.stipend_amount);
+    formData.append('job_type', jobDetails.job_type);
+    formData.append('application_date', jobDetails.application_date);
+    formData.append('status', jobDetails.status);
+    formData.append('job_link', jobDetails.job_link);
+    formData.append('referred_by', jobDetails.referred_by);
+
+    console.log('Request Body:', jobDetails);
     try {
+      console.log(sessionid)
       const response = await axios.post(
-        'https://online-resume-watcher-6xw5.onrender.com/addJobToProfile',
-        jobDetails,
+        'http://localhost:8000/addJobToProfile',
+        {
+          role: jobDetails.role,
+          company_name: jobDetails.company_name,
+          location: jobDetails.location,
+          stipend_amount: jobDetails.stipend_amount,
+          job_type: jobDetails.job_type,
+          application_date: jobDetails.application_date,
+          status: jobDetails.status,
+          job_link: jobDetails.job_link,
+          referred_by: jobDetails.referred_by,
+      },
         {
           withCredentials:true,
-          
+         
         }
       );
 
@@ -102,13 +125,20 @@ const AddJobForm = () => {
           />
         </label>
         <label>
-          Status :  <input
-            type="text"
-            name="status"
-            value={jobDetails.status}
-            onChange={handleInputChange}
-          />
-        </label>
+  Status:
+  <select
+    name="status"
+    value={jobDetails.status}
+    onChange={handleInputChange}
+  >
+    <option value="Watchlist">Watchlist</option>
+    <option value="Applied">Applied</option>
+    <option value="Online Assessment">Online Assessment</option>
+    <option value="Interview">Interview</option>
+    <option value="Accepted">Accepted</option>
+    <option value="Rejected">Rejected</option>
+  </select>
+</label>
         <label>
           Job Link :  <input
             type="text"

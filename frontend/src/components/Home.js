@@ -1,10 +1,46 @@
 // src/components/Home.js
-import React ,{useEffect}from 'react';
+import React ,{useEffect , useState}from 'react';
 import { Link } from 'react-router-dom';
 import '@dotlottie/player-component/dist/dotlottie-player.mjs'; // Import the dotlottie-player component
 
 import "./css/home.css"
+import axios from 'axios';
+import { getCookie } from '../csrf';
 const Home = () => {
+  console.log(getCookie('sessionid'));
+  console.log(getCookie('csrftoken'))
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  useEffect(() => {
+    // Check if the user is logged in by looking for the presence of a specific cookie
+    const sessionid = getCookie('sessionid');
+    const getuser = async ()=> {
+    if (sessionid) {
+      // User is logged in
+      setIsLoggedIn(true);
+      try {
+        const response = await axios.get('http://localhost:8000/get_logged_in_user', { 
+          withCredentials: true,
+        });
+        console.log(response.data['username'])
+        setUsername(response.data['username'])
+        
+      } 
+        catch(error) {
+          console.error('Error fetching username:', error);
+        }
+    } else {
+      // User is not logged in
+      setIsLoggedIn(false);
+    }
+    };
+    getuser();
+  }, []);
+
+
+
+
   return (
     <div className="grid">
       <p className="title">
@@ -42,17 +78,31 @@ const Home = () => {
                 ></dotlottie-player>
               </div>
   <div className='btns'>
-    <a className="button">
-      <Link to="/signup">SignUp</Link>
-    </a>
-    <a className="button">
-      <Link to="/login">Login</Link>
-    </a>
+  {isLoggedIn ? (
+          // If user is authenticated, show logout button and username
+          <>
+            <p className="username">Welcome,{username}</p>
+            <a className="button">
+              <Link to="/logout">Logout</Link>
+            </a>
+          </>
+        ) : (
+          // If user is not authenticated, show login button
+          <>
+            <a className="button">
+              <Link to="/signup">SignUp</Link>
+            </a>
+            <a className="button">
+              <Link to="/login">Login</Link>
+            </a>
+          </>
+        )}
     <a className="button">
       <Link to="/jobs">Jobs</Link>
     </a>
+
     <a className="button">
-      <Link to="/Dashboard">Dashboard</Link>
+      <Link to="/Dashboard">Track Jobs</Link>
     </a>
   </div>
 </div>

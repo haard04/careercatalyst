@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./css/jobs.css"
+import { Link } from 'react-router-dom';
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
 
@@ -18,23 +19,27 @@ const Jobs = () => {
       });
   }, []);
 
+  function reportJob(jobLink) {
+    console.log("Reporting job");
+
+    // Replace the URL with your Django API endpoint for reporting a job
+    axios.post('http://127.0.0.1:8000/report-job/', {"job_link":jobLink})
+      .then(response => {
+        console.log('Job reported successfully:', response);
+        setJobs(prevJobs => prevJobs.filter(job => job.job_link !== jobLink));
+      
+        // You can update the UI or take other actions if needed
+      })
+      .catch(error => {
+        console.error('Error reporting job:', error);
+      });
+  }
+
   return (
-    // <div>
-    //   <h2>Job Opportunities</h2>
-    //   <ul>
-    //     {jobs.map(job => (
-    //       <li key={job.job_id}>
-    //         <p>{job.role} at {job.company_name}</p>
-    //         <p>Location: {job.location}</p>
-    //         <p>Stipend: {job.stipend_amount}</p>
-    //         <p>Job Type: {job.job_type}</p>
-    //         <p>Apply here: {job.job_link}</p>
-    //         {/* Add more details as needed */}
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
+    <div>
+      <Link to="/">Home</Link>
 <div class="job-opportunities">
+  
   {jobs.map(job => (
     <div class="job-section" key={job.job_id}>
       <h3>{job.role}</h3>
@@ -42,10 +47,13 @@ const Jobs = () => {
       <p>Location: {job.location}</p>
       <p>Stipend: {job.stipend_amount}</p>
       <p>Job Type: {job.job_type}</p>
-      <p>Apply here: <a href={job.job_link}>{job.job_link}</a></p>
-      {/* Add more details as needed */}
+      <button onClick={() => window.open(job.job_link, "_blank")}>Apply Now</button>
+      <button onClick={() => reportJob(job.job_link)}>Report Job</button>
+      {/* <p>Apply here: <a href={job.job_link}>{job.job_link}</a></p> */}
+      
     </div>
   ))}
+</div>
 </div>
 
   );
