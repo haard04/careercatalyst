@@ -31,7 +31,7 @@ Career Catalyst is a web application designed to help users track and manage the
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/haard04/careercatalyst
    
 2. Install Dependencies:
    
