@@ -16,7 +16,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://online-resume-watcher-6xw5.onrender.com/signup', {
+      const response = await axios.post('http://127.0.0.1:8000/signup', {
         username,
         email,
         password,

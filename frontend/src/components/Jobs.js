@@ -9,7 +9,7 @@ const Jobs = () => {
   useEffect(() => {
     console.log('Fetching jobs...');
     // Replace the URL with your Django API endpoint
-    axios.get('https://online-resume-watcher-6xw5.onrender.com/getJobopportunities')
+    axios.get('http://127.0.0.1:8000/getJobopportunities')
       .then(response => {
         setJobs(response.data.active_jobs);
         console.log(response);
