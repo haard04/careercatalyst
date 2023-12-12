@@ -1,0 +1,10 @@
+Django>=3.2,<4.0
+gunicorn
+mysqlclient
+python-dotenv
+pymysql
+django-cors-headers
+PyPDF2
+djangorestframework
+nltk
+PyJWT

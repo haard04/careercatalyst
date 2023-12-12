@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of PDFs</title>
+</head>
+<body>
+    <h1>List of PDFs</h1>
+    {% for instance in instances %}
+    <a href="{% url 'view_pdf' instance.username %}" target="_blank">{{ instance.username }}.pdf</a><br>
+{% empty %}
+    <p>No Resume found.</p>
+{% endfor %}
+
+</body>
+</html>

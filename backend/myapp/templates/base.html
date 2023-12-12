@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Online Resume Watcher{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        .navbar {
+            background-color: #333;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .navbar h1 {
+            color: #fff;
+            margin: 0;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .navbar a:hover {
+            background-color: #555;
+        }
+        .container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Online Resume Watcher</h1>
+        {% if user.is_authenticated %}
+        {% if pdf_instance and pdf_instance.pdf_file %}
+                
+                <a href="{% url 'upload_pdf' %}">Update Resume</a>
+                <a href="{% url 'view_pdf' user.username %}">View Your Resume</a>
+                {%else%}
+                <a href="{% url 'upload_pdf' %}">Upload Resume</a>
+                {% endif %}
+           
+            
+            
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

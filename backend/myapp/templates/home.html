@@ -1,0 +1,63 @@
+{% comment %} {% extends 'base.html' %}
+
+{% block title %}Online Resume Watcher{% endblock %}
+
+{% block view_resume_link %}
+    {% if user.is_authenticated %}
+        <li><a href="/view/{{ user.username }}/">{{ user.username }}'s Resume</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <h2>Welcome to Online Resume Watcher, {{user.username}}</h2>
+    <p>Your Resume View Count: {{ view_count }}</p> 
+    {%else%}
+    <h2>Welcome to Online Resume Watcher !</h2>
+    {%endif%}
+    <p>This is a platform to watch resumes online.</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="username">Enter Username:</label>
+        <input type="text" id="viewUser" name="viewuser" required>
+        <button type="submit">View Resume</button>
+    </form>
+    <h3>Tutorial: Getting Started</h3>
+    <ol>
+        <li>
+            <h4>Authentication and Account Creation</h4>
+            <ol>
+                <li>Visit the Website: Open your web browser and navigate to the Online Resume Watcher website.</li>
+                <li>Create an Account: Click on the "Sign Up" or "Register" button to create a new account. Provide your email address and create a secure password.</li>
+                <li>Log In: After registering, you'll be redirected to the login page. Enter your email and password, then click "Log In" to access your personalized dashboard.</li>
+            </ol>
+        </li>
+        <li>
+            <h4>Upload Your Resume</h4>
+            <ol>
+                <li>Access Resume Section: From your dashboard, click on the "Upload Resume" or "Add New Resume" button.</li>
+                <li>Choose Your Resume File: Click on the "Choose File" button and select your resume in PDF format from your computer. You can also provide a title or description for your resume.</li>
+                <li>Upload Your Resume: After selecting the file and providing any additional details, click "Upload" or "Save." Your resume is now uploaded to the platform.</li>
+            </ol>
+        </li>
+        <li>
+            <h4>View Others' Resumes Without Login</h4>
+            <ol>
+                <li>Access Shared Resume URL: To view someone else's resume without logging in, obtain their shared resume URL. This URL might be shared with you directly or through a job application.</li>
+                <li>Open the Shared URL: Copy and paste the shared resume URL into your web browser's address bar. Press "Enter," and the resume will be displayed directly on the website without requiring a login or file download.</li>
+            </ol>
+        </li>
+        <li>
+            <h4>Reupload an Updated Resume Without Changing Your URL</h4>
+            <ol>
+                <li>Access Your Dashboard: Log in to your Online Resume Watcher account and access your personalized dashboard.</li>
+                <li>Edit Your Resume: Find the resume you want to update and click on the "Edit" or "Update" button next to it.</li>
+                <li>Choose the Updated File: Click on the "Choose File" button and select the updated version of your resume in PDF format from your computer.</li>
+                <li>Update Your Resume: After selecting the new file, click "Update" or "Save." The platform will automatically replace the old resume file with the updated version while keeping the same personalized URL intact.</li>
+            </ol>
+        </li>
+    </ol>
+
+    
+{% endblock %} {% endcomment %}
+<h2> We are Temporarily Down , We Are sorry </h2> 

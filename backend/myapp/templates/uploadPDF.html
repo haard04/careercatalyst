@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload PDF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+        .home-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .container {
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fff;
+            max-width: 500px;
+            width: 100%;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+        .view-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .view-link:hover {
+            background-color: #555;
+        }
+        .home-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .home-link a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .home-link a:hover {
+            color: #FFF;
+        }
+        .home-icon {
+            position: absolute;
+            top: 40px;
+            right: 4500px;
+            font-size: 20px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    {% if user.is_authenticated %}
+            {% if pdf_instance %}
+        <a class="home-icon" href="{% url 'home' %}"><i class="fas fa-home"></i></a>
+        <h1>Update Resume</h1>
+        {%else%}
+        <a class="home-icon" href="{% url 'home' %}"><i class="fas fa-home"></i></a>
+        <h1>Upload Resume</h1>
+        {% endif %}
+    {% endif %}
+    </header>
+    <div class="container">
+        {% if user.is_authenticated %}
+            {% if pdf_instance %}
+                <a href="{% url 'view_pdf' pdf_instance.username %}" class="view-link" target="_blank">View existing Resume</a>
+                <br>
+                <form method="post" enctype="multipart/form-data" action="{% url 'save_pdf' pdf_instance.username %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="username" value="{{ user.username }}">
+                    <label for="pdf_file">Select a new PDF file:</label>
+                    <input type="file" name="pdf_file" id="pdf_file" accept="application/pdf" required>
+                    <br>
+                    <label for="overwrite_pdf">Overwrite existing Resume?</label>
+                    <input type="checkbox" name="overwrite_pdf" id="overwrite_pdf">
+                    <br>
+                    <input type="submit" value="Upload PDF">
+                </form>
+            {% else %}
+                <h1>Resume not uploaded</h1>
+                <form method="post" enctype="multipart/form-data" action="{% url 'save_pdf' 'example' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="username" value="{{ user.username }}">
+                    <label for="pdf_file">Select a PDF file:</label>
+                    <input type="file" name="pdf_file" id="pdf_file" accept="application/pdf" required>
+                    <br>
+                    <input type="submit" value="Upload PDF">
+                </form>
+            {% endif %}
+        {% else %}
+        <div class="login-link">
+            <a href="{% url 'login' %}"> Login here!</a>
+        </div>
+
+            {% endif %}
+    </div>
+</body>
+</html>

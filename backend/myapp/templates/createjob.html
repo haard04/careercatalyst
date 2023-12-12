@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Job</title>
+</head>
+
+<body>
+    <h1>Add Job</h1>
+    <form id="jobForm">
+        <label for="role">Role:</label>
+        <input type="text" id="role" name="role" required><br>
+
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" required><br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required><br>
+
+        <label for="stipend_amount">Stipend Amount:</label>
+        <input type="number" id="stipend_amount" name="stipend_amount" required><br>
+
+        <label for="job_type">Application Number:</label>
+        <input type="text" id="job_type" name="job_type" required><br>
+
+        <label for="application_date">Application Date:</label>
+        <input type="date" id="application_date" name="application_date" required><br>
+
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required><br>
+
+        <label for="job_link">Job Link:</label>
+        <input type="url" id="job_link" name="job_link" required><br>
+
+        <label for="referred_by">Referred By:</label>
+        <input type="text" id="referred_by" name="referred_by" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.getElementById("jobForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var formData = new FormData(this);
+            var xhr = new XMLHttpRequest();
+            var user_id = {{ user_id }}; // Use the user_id variable from the template context
+            xhr.open("POST", `/add_job_to_profile/${user_id}/`, true); // Use template literals to construct the URL
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    alert(response.message);
+                    // Handle success response as needed
+                }
+            };
+            xhr.send(formData);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+        .signup-container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        h5 {
+            color: red;
+        }
+        p {
+            margin: 10px 0;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+        .login-link {
+            text-align: center;
+        }
+        .login-link a {
+            color: #333;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            color: #555;
+        }
+        .home-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .home-link a {
+            color: #333;
+            text-decoration: none;
+        }
+        .home-link a:hover {
+            color: #555;
+        }
+        .home-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="signup-container">
+        <a class="home-icon" href="{% url 'home' %}"><i class="fas fa-home"></i></a>
+        <h1>Sign Up</h1>
+        {% for message in messages %}
+            <h5>{{ message }}</h5>
+        {% endfor %}
+        <form method="POST" action="signup">
+            {% csrf_token %}
+            <p>Username:</p>
+            <input type="text" name="username" required>
+            <p>Email Id:</p>
+            <input type="text" name="email" required>
+            <p>Password:</p>
+            <input type="password" name="password" required>
+            <p>Confirm Password:</p>
+            <input type="password" name="password2" required>
+            <br><br>
+            <input type="submit" value="Sign Up">
+        </form>
+        <div class="login-link">
+            <a href="{% url 'login' %}">Already have an account? Login here!</a>
+        </div>
+    </div>
+</body>
+</html>

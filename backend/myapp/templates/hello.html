@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 600px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .space-y-1 {
+        margin-bottom: 0.5rem;
+      }
+      
+      .text-center {
+        text-align: center;
+      }
+      
+      .text-3xl {
+        font-size: 1.875rem;
+      }
+      
+      .text-4xl {
+        font-size: 2.25rem;
+      }
+      
+      .bg-clip-text {
+        background: linear-gradient(90deg, #ff9900, #ff4d00);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+      
+      hr {
+        border: none;
+        border-top: 2px solid #ccc;
+        width: 100%;
+      }
+      
+      p {
+        margin-bottom: 1rem;
+      }
+      
+      button {
+        background-image: linear-gradient(to right, #ff9900, #ff4d00);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 1.125rem;
+        transition: all 0.3s ease;
+      }
+      
+      button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      
+  </style>
+</head>
+
+<body>
+  <div class="grid h-full content-center gap-3 md:gap-6 text-center">
+    <div class="space-y-1 text-3xl font-bold md:space-y-3 md:text-4xl">
+      <h1 class="bg-clip-text">Title</h1>
+      <hr class="mx-auto w-1/2 md:w-1/4">
+      <h2>Advance Your Job Search</h2>
+    </div>
+    <p>All your job search details in one place. No more messy job search spreadsheets. Huntr keeps track of every
+      detail about your job opportunities regardless of where you found them. Track contacts, notes, dates, tasks,
+      documents, job descriptions, salaries, locations, company data and more. It's like a CRM for your job search.
+    </p>
+    <button onclick="redirectToLogin()" class="mx-auto bg-gradient-to-r from-primary to-secondary font-bold md:text-lg">
+      Start Managing Your Jobs
+    </button>
+  </div>
+
+  <script>
+    function redirectToLogin() {
+      window.location.href = '/login';
+    }
+  </script>
+</body>
+
+</html>
