@@ -26,45 +26,70 @@ Career Catalyst is a web application designed to help users track and manage the
    - Users can report irrelevant or inappropriate job opportunities.
    - A job opportunity is deleted from the Job Opportunities section after receiving a certain number of reports.
 
-## Getting Started
+# Getting Started
 
-1. Clone the repository:
+## Clone the repository:
 
    ```bash
    git clone https://github.com/haard04/careercatalyst
-   
-2. Install Dependencies:
-   
-   ### For Backend: 
-   ```bash
-     cd backend
-     pip install -r requirements.txt
    ```
-   ### For Frontend:
-  ```bash
-    cd frontend
-    npm install
-  ```
+## Install Dependencies:
+### For Backend
+   
+  1. **Create a `.env` File:**
+   - Create a `.env` file in the `backend` directory.
+   - Add the following configuration to the `.env` file:
 
-3. Configure Database:
+     ```env
+     # .env
+     NAME=your_database_name
+     USER=your_database_user
+     PASSWORD=your_database_password
+     HOST=your_database_host
+     ```
+
+   Replace `your_database_name`, `your_database_user`, `your_database_password`, and `your_database_host` with your actual database credentials.
+
+2. **Install Python Dependencies:**
+   - Navigate to the `backend` directory.
+
+     ```bash
+     cd backend
+     ```
+
+   - Install the required Python packages using the `requirements.txt` file.
+
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+   ### For Frontend
+   
+   ```bash
+   cd frontend
+   npm install
+   ```
+## Configure Database:
   - Set up your database credentials in the Django settings.
   - Migrate the database.
     
     ```bash
     cd backend
+    python manage.py makemigrations
     python manage.py migrate
     ```
-4. Run the Application:
+## Run the Application:
    ### Start the Django development server.
-     ```bash
+   
+   ```bash
      cd backend
      python manage.py runserver
-     ```
-  - Start the React.js development server.
-    ```bash
+   ```
+  ### Start the React.js development server.
+ ```bash
     cd frontend
     npm start
-    ```
+ ```
 
 5. Access the Application:
    ### Open your browser and navigate to http://localhost:3000 to access the Career Catalyst application.
