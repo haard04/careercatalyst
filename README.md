@@ -7,6 +7,7 @@ Career Catalyst is a web application designed to help users track and manage the
 - **Backend:** Django, REST APIs
 - **Frontend:** React.js
 - **Database:** AWS RDS
+- **Other:** NLP
 
 ## Key Features
 
