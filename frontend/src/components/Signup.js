@@ -2,15 +2,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "./css/signup.css"
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate()
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -22,9 +22,11 @@ const Signup = () => {
         password,
         password2,
       });
+        if(response.status ===201) {
 
-      console.log(response.data); // Log the response data (optional)
-
+      console.log(response.data); 
+      navigate('/')// Log the response data (optional)
+        }
       // Handle successful signup (redirect, show a success message, etc.)
     } catch (error) {
       if (error.response) {
@@ -66,11 +68,11 @@ const Signup = () => {
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1" class="text-white">Confirm Password</label>
-        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ></input>
+        <input value={password2} onChange={(e) => setPassword2(e.target.value)} type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ></input>
       </div>
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1" ></input>
-        <label class="form-check-label text-white" for="exampleCheck1">Check me out</label>
+
       </div>
       <button type="submit" class="btn btn-primary" >Sign Up</button>
     </form>

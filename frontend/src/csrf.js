@@ -32,4 +32,9 @@ export function setCookie(name, value, options = {}) {
     // Set the cookie
     document.cookie = cookieString;
   }
+
   
+export function removeCookie(name) {
+  // Set expiration date to a past date
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+}

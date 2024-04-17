@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Jobs from './components/Jobs';
 import Dashboard from './components/Dashboard';
 import AddJobForm from './components/newJob';
+import Logout from './components/Logout';
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoutes = () => {
       <Route path="/jobs" element={<Jobs />} />
       <Route path="/Dashboard" element={<Dashboard />} />
       <Route path="/AddJobForm" element={<AddJobForm />} />
+      <Route path="/logout" element={<Logout />} />
     </Routes>
   );
 };

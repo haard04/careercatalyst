@@ -275,13 +275,15 @@ from django.contrib.auth.decorators import login_required
 # @login_required
 # @csrf_exempt
 def add_job_to_profile(request):
-    session_id = request.COOKIES.get('sessionid')
-    print(session_id)
-    
-    user_id = request.user.id
-    username = request.user.username
-    print(username+'aaaa')
+    session_id = request.session.session_key
+    print(str(session_id)+'sessionid is ')
+    # print(request.sessionId+'ssss') 
+    # user_id = request.user.id
+    # print(request.user.username)
+    username = request.data.get('username')
+    print(username+'is here')
     user = get_object_or_404(MyModel, username=username)
+
 
     if request.method == 'POST':
         # Retrieve job details from POST data

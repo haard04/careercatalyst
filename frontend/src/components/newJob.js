@@ -1,11 +1,41 @@
 // src/components/AddJobForm.js
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { getCookie } from '../csrf';
 import "./css/addjob.css"
+import { useNavigate } from 'react-router-dom';
 const AddJobForm = () => {
   const csrftoken = getCookie('csrftoken');
   const sessionid = getCookie('sessionid');
+  const navigate = useNavigate(); 
+
+  const [username, setUsername] = useState('');
+  useEffect(() => {
+    // Check if the user is logged in by looking for the presence of a specific cookie
+    const sessionid = getCookie('sessionid');
+    const getuser = async ()=> {
+    if (sessionid) {
+      // User is logged in
+
+      try {
+        const response = await axios.get('http://localhost:8000/get_logged_in_user', { 
+          withCredentials: true,
+        });
+        console.log(response.data['username'])
+        setUsername(response.data['username'])
+        
+      } 
+        catch(error) {
+          console.error('Error fetching username:', error);
+        }
+    } else {
+      // User is not logged in
+
+    }
+    };
+    getuser();
+  }, []);
+
 
   const [jobDetails, setJobDetails] = useState({
     role: '',
@@ -18,7 +48,7 @@ const AddJobForm = () => {
     job_link: '',
     referred_by: '',
   });
-
+  const [successMessage, setSuccessMessage] = useState('');
   
 
   const handleInputChange = (e) => {
@@ -47,8 +77,9 @@ const AddJobForm = () => {
     try {
       console.log(sessionid)
       const response = await axios.post(
-        'http://localhost:8000/addJobToProfile',
+        'http://127.0.0.1:8000/addJobToProfile',
         {
+          username:username,
           role: jobDetails.role,
           company_name: jobDetails.company_name,
           location: jobDetails.location,
@@ -60,22 +91,39 @@ const AddJobForm = () => {
           referred_by: jobDetails.referred_by,
       },
         {
-          withCredentials:true,
+          withCredentials:true,xsrfCookieName:true,withXSRFToken:true
          
         }
       );
 
-      console.log(response.data); // Handle success or error message from the server
+      if (response.status === 210) {
+        setSuccessMessage('Job added successfully!');
+        // Clear form after successful submission
+        setJobDetails({
+          role: '',
+          company_name: '',
+          location: '',
+          stipend_amount: 0,
+          job_type: '',
+          application_date: '',
+          status: 'Watchlist',
+          job_link: '',
+          referred_by: '',
+        });
+        navigate('/')
+      } else {
+        console.log('Unexpected response:', response.status);
+
+      } // Handle success or error message from the server
     } catch (error) {
       console.error('Error adding job:', error.message,error.status);
     }
   };
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
       <h2>Add Job</h2>
-
+      {successMessage && <p className="success-message">{successMessage}</p>}
         <label>
           Role :  <input
             type="text"

@@ -105,7 +105,7 @@ DATABASES = {
         'USER': os.getenv("USER"),
         'PASSWORD':os.getenv("PASSWORD"),
         'HOST':os.getenv("HOST"),
-        'PORT': '3306'
+        'PORT': int(os.getenv("PORT"))
         
 
 
@@ -120,7 +120,7 @@ try:
         user=os.getenv("USER"),
         password=os.getenv("PASSWORD"),
         db=os.getenv("NAME"),
-        port=3306,
+        port= int(os.getenv("PORT")),
     )
     print("Database connection successful!")
     print(os.getenv("HOST")+' '+os.getenv("USER")+' '+os.getenv("PASSWORD")+' '+os.getenv("NAME"))
